@@ -1,0 +1,22 @@
+{
+  "name": "apigeolocalizacao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "latlongWS.js",
+  "dependencies": {
+    "@google/maps": "^0.4.6",
+    "cors": "^2.8.4",
+    "googleapis": "^28.1.0",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.3",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "devDependencies": {
+    "express": "^4.16.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <title>Localizacao</title>
+</head>
+<body>
+    <p><span id="latitude"></span></p>
+    <p><span id="longitude"></span></p>
+    <p><span id="location"></span></p>
+
+    <script>
+        var latitude, longitude;
+
+    
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    $("#latitude").text("Latitude = " + latitude);
+                    $("#longitude").text("Longitude = " + longitude);
+                    showLocation(latitude,longitude);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showLocation(latitude,longitude){
+            $.ajax({
+                type: "GET",
+                async: true,
+                crossDomain: true,
+                dataType: "json",
+                url: "http://127.0.0.1:3000/location?lat="+latitude+"&lon="+longitude,
+                method: "GET",
+                headers: {
+                    "Cache-Control": "no-cache",
+                    "Access-Control-Allow-Origin": "*"
+                },
+                success: function(data){
+                    $("#location").text(data.location);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+                }
+            )};
+
+    
+    
+    $(document).ready(function() {
+        getLocation();
+
+});
+    </script>
+</body>
+</html>
